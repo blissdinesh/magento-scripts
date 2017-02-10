@@ -1,0 +1,65 @@
+<div class="block block-subscribe">
+
+<div id="feedback1" style="display:none; padding:10px;" >
+    Thank you for subscribing to our newsletter! 
+    </div>
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Newsletter') ?></span></strong>
+    </div>
+    <form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail1">
+        <div class="block-content">
+        
+            <div class="form-subscribe-header">
+                <label for="newsletter"><?php echo $this->__('Sign Up for Our Newsletter:') ?></label>
+            </div>
+            <div class="input-box">
+               <input type="email" autocapitalize="off" autocorrect="off" spellcheck="false" name="email" id="newsletter" class="popup_newsletter" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Sign up for our newsletter')) ?>" class="input-text required-entry validate-email" />
+            </div>
+            <div class="actions">
+                <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape($this->__('Subscribe')) ?>" class="button"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail1');
+    //]]>
+    </script>
+</div>
+
+
+
+
+<script type="text/javascript">
+
+        jQuery(function() { // wait for the DOM to be ready
+            jQuery('#newsletter-validate-detail1').submit(function() { // bind function to submit event of form
+                jQuery.ajax({
+                    type: jQuery(this).attr('method'), // get type of request from 'method'
+                    url: jQuery(this).attr('action'), // get url of request from 'action'
+                    data: jQuery(this).serialize(), // serialize the form's data
+                    success: function(response) {
+                        // if everything goes well, update the div with the response
+                        jQuery('.popup_newsletter').val(' ');
+						
+                        jQuery('#feedback1').show();
+						jQuery('#feedback1').css('color', '#3c763d');
+						jQuery('#feedback1').css('background-color', '#dff0d8');
+						//jQuery("#feedback1").delay(2000).fadeOut( "slow" );
+						setTimeout(
+						  function() 
+							  {
+								 jQuery(".fancybox-item.fancybox-close").trigger("click");
+							  }, 2000);
+						
+                        
+                    }
+					
+				
+					
+                });
+                return false; // important: prevent the form from submitting
+            });
+        });
+        
+</script>
